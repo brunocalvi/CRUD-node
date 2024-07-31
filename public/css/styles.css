@@ -1,0 +1,15 @@
+body{
+  margin-top:20px;
+  background:#f8f8f8
+}
+.menu-lateral-esquerda {
+  width: 210px;
+}
+.img-usuario-pequeno {
+  width: 35px; 
+  height: 35px; 
+  border-radius: 3px;
+}
+.img-usuario-pequeno .fa-photo {
+  opacity: 0.8;
+}
