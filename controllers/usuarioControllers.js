@@ -51,9 +51,11 @@ module.exports = (app) => {
   };
 
   async function atualizarSenhaUsuario(id, senha) {
+    let senhaHas = await senhaHash(senha);
+
     return await conexao.table('usuarios')
         .where({ id: id })
-        .update({ senha: senhaHash(senha) });
+        .update({ senha: senhaHas });
   };
 
   async function login(usuario, senha) {

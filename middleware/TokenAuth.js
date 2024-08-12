@@ -16,7 +16,7 @@ module.exports = (req, res, next) => {
       res.status(401).json({
         status: 401,
         metodo: 'validar token', 
-        mensagem: `Erro ao verificar o token erro: ${e}`
+        mensagem: `Erro ao verificar o token: ${e}`
       });
     }
     
