@@ -16,16 +16,18 @@ module.exports = (app) => {
   };
 
   async function cadastraUsuario(dados) {
-    return await conexao.insert([{
+    let senhaHas = await senhaHash(dados.senha);
+
+    return await conexao.insert({
       nome: dados.nome,
       usuario: dados.usuario,
       email: dados.email,
       sobre: dados.sobre,
-      senha: senhaHash(dados.senha),
+      senha: senhaHas,
       postagem_blog: dados.postagem_blog,
       boletim_noticias: dados.boletim_noticias,
       ofertas_pessoais: dados.ofertas_pessoais
-    }]).into('usuarios');
+    }).into('usuarios');
   }
 
   async function dadosDeUsuario(id) {

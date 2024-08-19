@@ -10,7 +10,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-consign()
+consign({ verbose: false })
   .include('controllers')
   .then('routes')
   .into(app);
@@ -18,4 +18,6 @@ consign()
 app.listen(4223, () => {
   console.log("Aplicação rodando na porta 4223.");
 });
+
+module.exports = app;
 

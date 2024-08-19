@@ -10,7 +10,7 @@ module.exports = function(app) {
 
       res.status(200).json({ 
         status: 200, 
-        Metodo: 'lista de usuarios', 
+        Metodo: 'Lista de usuários.', 
         usuarios: pegaUsuarios 
       });
 
@@ -19,8 +19,8 @@ module.exports = function(app) {
 
       res.status(404).json({
         status: 404,
-        metodo: 'lista de usuarios',
-        mensagem: 'Falha ao consultar os usuários'
+        metodo: 'Lista de usuários.',
+        mensagem: 'Falha ao consultar os usuários.'
       });
     }
   });
@@ -30,7 +30,7 @@ module.exports = function(app) {
     let erro = [];
 
     if(isNaN(id)) {
-      erro.push("O valor inserido na url não é válido.");
+      erro.push("O valor inserido na URL é inválido.");
     }
 
     if(erro.length == 0) {
@@ -39,7 +39,7 @@ module.exports = function(app) {
 
         res.status(200).json({
           status: 200,
-          metodo: 'dados do usuario',
+          metodo: 'Dados do usuário.',
           usuario: umUsuario
         })
 
@@ -48,22 +48,22 @@ module.exports = function(app) {
 
         res.status(404).json({
           status: 404,
-          metodo: 'dados do usuario',
-          mensagem: 'Falha ao consultar os dados'
+          metodo: 'Dados do usuário.',
+          mensagem: 'Falha ao consultar os dados.'
         });
       }
     } else {
 
       res.status(404).json({ 
         status: 404, 
-        metodo: 'dados do usuario', 
+        metodo: 'Dados do usuário.', 
         mensagem: erro 
       });
     }
     
   });
 
-  app.post("/api/usuario", validaToken, async (req, res) => {
+  app.post("/api/usuario", async (req, res) => {
     let dados = req.body;
     let { nome, usuario, email, sobre, senha, postagem_blog, boletim_noticias, ofertas_pessoais } = dados;
  
@@ -84,7 +84,7 @@ module.exports = function(app) {
     }
 
     if(senha.length < 8) {
-      erro.push("Senha deve ter no minimo 8 caracteres.");
+      erro.push("Senha deve ter no mínimo 8 caracteres.");
     }
 
     if(!senha.match(/[a-z]/)) {
@@ -92,11 +92,11 @@ module.exports = function(app) {
     }
 
     if(!senha.match(/[A-Z]/)) {
-      erro.push("Senha deve conter letras maiusculas.");
+      erro.push("Senha deve conter letras maiúsculas.");
     }
 
     if(!senha.match(/\d/)) {
-      erro.push("Senha deve conter numeros");
+      erro.push("Senha deve conter números.");
     }
 
     if(!senha.match(/[^a-zA-Z\d]/)) {
@@ -106,11 +106,13 @@ module.exports = function(app) {
     if(erro.length == 0) {
       try {
         const cadasUsuario = await app.controllers.usuarioControllers.cadastraUsuario(dados);
-        
+        const id = cadasUsuario[0];
+
         res.status(201).json({ 
           status: 201, 
-          metodo: 'cadastrar usuario', 
-          mensagem: `Usuário inserido com sucesso.` 
+          metodo: 'Cadastrar usuário.',
+          mensagem: `Usuário cadastrado com sucesso.`, 
+          usuario: id
         });
 
       } catch(e) {
@@ -118,7 +120,7 @@ module.exports = function(app) {
 
         res.status(404).json({ 
           status: 404, 
-          metodo: 'cadastrar usuario', 
+          metodo: 'Cadastrar usuário.', 
           mensagem: 'Falha ao inserir o usuário.' 
         });
       }
@@ -126,7 +128,7 @@ module.exports = function(app) {
 
       res.status(404).json({ 
         status: 404, 
-        metodo: 'cadastrar usuario', 
+        metodo: 'Cadastrar usuário.', 
         mensagem: erro 
       });
     }
@@ -140,8 +142,8 @@ module.exports = function(app) {
 
       res.status(200).json({
         status: 200,
-        metodo: 'deletar usuario',
-        mensagem: 'Usuário deletado com sucesso'
+        metodo: 'Deletar usuário.',
+        mensagem: 'Usuário deletado com sucesso.'
       });
 
     } catch(e) {
@@ -149,7 +151,7 @@ module.exports = function(app) {
 
       res.status(404).json({
         status: 404,
-        metodo: 'deletar usuario',
+        metodo: 'Deletar usuário.',
         mensagem: 'Falha ao deletar o usuário.' 
       })
     }
@@ -178,7 +180,7 @@ module.exports = function(app) {
 
     if(senha != undefined) {
       if(senha.length < 8) {
-        erro.push("Senha deve ter no minimo 8 caracteres.");
+        erro.push("Senha deve ter no mínimo 8 caracteres.");
       }
   
       if(!senha.match(/[a-z]/)) {
@@ -186,11 +188,11 @@ module.exports = function(app) {
       }
   
       if(!senha.match(/[A-Z]/)) {
-        erro.push("Senha deve conter letras maiusculas.");
+        erro.push("Senha deve conter letras maiúsculas.");
       }
   
       if(!senha.match(/\d/)) {
-        erro.push("Senha deve conter numeros");
+        erro.push("Senha deve conter números.");
       }
   
       if(!senha.match(/[^a-zA-Z\d]/)) {
@@ -208,8 +210,8 @@ module.exports = function(app) {
 
         res.status(200).json({
           status: 200,
-          metodo: 'atualizar usuario',
-          mensagem: 'Usuário atualizado com sucesso'
+          metodo: 'Atualizar usuário.',
+          mensagem: 'Usuário atualizado com sucesso.'
         });
 
       } catch(e) {
@@ -217,7 +219,7 @@ module.exports = function(app) {
 
         res.status(404).json({
           status: 404,
-          metodo: 'atualizar usuario',
+          metodo: 'Atualizar usuário.',
           mensagem: 'Falha ao atualizar o usuário.' 
         })
 
@@ -226,7 +228,7 @@ module.exports = function(app) {
 
       res.status(404).json({ 
         status: 404, 
-        metodo: 'atualizar usuario', 
+        metodo: 'Atualizar usuário.', 
         mensagem: erro 
       });
 
@@ -245,7 +247,7 @@ module.exports = function(app) {
 
         res.status(200).json({
           status: 200,
-          metodo: 'login de usuario',
+          metodo: 'Login de usuário.',
           usuario: login,
           token: token
         });
@@ -253,8 +255,8 @@ module.exports = function(app) {
       } else {
         res.status(401).json({
           status: 401,
-          metodo: 'login de usuario',
-          mensagem: 'Usuário ou senha invalidos'
+          metodo: 'Login de usuário.',
+          mensagem: 'Usuário ou senha inválidos.'
         })
       }
 
@@ -263,8 +265,8 @@ module.exports = function(app) {
 
       res.status(404).json({
         status: 404,
-        metodo: 'login de usuario',
-        mensagem: 'Erro ao realizar o login'
+        metodo: 'Login de usuário.',
+        mensagem: 'Erro ao realizar o login.'
       })
     }
 
